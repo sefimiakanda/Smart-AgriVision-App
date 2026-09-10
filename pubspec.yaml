@@ -30,7 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  tflite_flutter: ^0.10.0 # Ou la version la plus récente compatible
+  tflite_flutter: 0.12.1 # Ou la version la plus récente compatible
   image_picker: ^1.0.7    # Pour capturer ou choisir une image depuis l'appareil
   image: ^4.2.0           # Pour redimensionner l'image aux dimensions du modèle (ex: 160x160)
 
