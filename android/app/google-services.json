@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "969245355476",
+    "project_id": "agrivision-7d3af",
+    "storage_bucket": "agrivision-7d3af.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969245355476:android:7366802197c5a8fe263a41",
+        "android_client_info": {
+          "package_name": "com.example.agrivision"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1jE6jVTiCLGDgbTcW1svM78fRgFE8ICo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
