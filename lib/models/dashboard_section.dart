@@ -13,5 +13,6 @@ const dashboardSections = [
   DashboardSection(label: 'Carnet', icon: Icons.menu_book_outlined),
   DashboardSection(label: 'Diagnostic', icon: Icons.biotech_outlined),
   DashboardSection(label: 'Météo', icon: Icons.cloud_outlined),
+  DashboardSection(label: 'NDVI', icon: Icons.satellite_alt_outlined),
   DashboardSection(label: 'Assistant', icon: Icons.chat_bubble_outline),
 ];
