@@ -33,6 +33,9 @@ class AuthController extends ChangeNotifier {
         'weak-password' =>
           'Le mot de passe doit contenir au moins 6 caractères.',
         'invalid-email' => 'Adresse email invalide.',
+        'operation-not-allowed' =>
+          'La connexion email n’est pas activée dans Firebase.',
+        'network-request-failed' => 'Connexion Internet impossible. Réessayez.',
         _ => 'Impossible de se connecter. Vérifiez votre connexion.',
       };
       return false;

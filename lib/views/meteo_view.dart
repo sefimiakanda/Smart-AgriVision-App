@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/weather_service.dart';
+import '../utils/user_error_message.dart';
 
 class MeteoView extends StatefulWidget {
   const MeteoView({super.key});
@@ -67,9 +68,7 @@ class _MeteoViewState extends State<MeteoView> {
       if (mounted) setState(() => _weather = weather);
     } catch (error) {
       if (mounted) {
-        setState(
-          () => _error = error.toString().replaceFirst('Bad state: ', ''),
-        );
+        setState(() => _error = userErrorMessage(error));
       }
     } finally {
       if (mounted) setState(() => _loading = false);

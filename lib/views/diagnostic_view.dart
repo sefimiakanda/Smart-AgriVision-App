@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../services/diagnosis_service.dart';
+import '../utils/user_error_message.dart';
 
 class DiagnosticView extends StatefulWidget {
   const DiagnosticView({super.key});
@@ -62,9 +63,16 @@ class _DiagnosticViewState extends State<DiagnosticView> {
   }
 
   Future<void> _chooseImage() async {
-    final image =
-        await _picker.pickImage(source: ImageSource.camera) ??
-        await _picker.pickImage(source: ImageSource.gallery);
+    XFile? image;
+    try {
+      image = await _picker.pickImage(source: ImageSource.camera);
+      image ??= await _picker.pickImage(source: ImageSource.gallery);
+    } catch (error) {
+      if (mounted) {
+        setState(() => _error = userErrorMessage(error));
+      }
+      return;
+    }
     if (image == null) return;
     setState(() {
       _image = image;
@@ -82,9 +90,7 @@ class _DiagnosticViewState extends State<DiagnosticView> {
       }
     } catch (error) {
       if (mounted) {
-        setState(
-          () => _error = error.toString().replaceFirst('Bad state: ', ''),
-        );
+        setState(() => _error = userErrorMessage(error));
       }
     } finally {
       if (mounted) setState(() => _loading = false);

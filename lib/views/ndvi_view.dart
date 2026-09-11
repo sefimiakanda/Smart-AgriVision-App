@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/ndvi_service.dart';
+import '../utils/user_error_message.dart';
 
 class NdviView extends StatefulWidget {
   const NdviView({super.key});
@@ -94,9 +95,7 @@ class _NdviViewState extends State<NdviView> {
       if (mounted) setState(() => _result = value.toStringAsFixed(3));
     } catch (error) {
       if (mounted) {
-        setState(
-          () => _error = error.toString().replaceFirst('Bad state: ', ''),
-        );
+        setState(() => _error = userErrorMessage(error));
       }
     } finally {
       if (mounted) setState(() => _loading = false);

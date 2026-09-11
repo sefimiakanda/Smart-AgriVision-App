@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../services/gemini_service.dart';
+import '../utils/user_error_message.dart';
 
 class AssistantView extends StatefulWidget {
   const AssistantView({super.key});
@@ -78,9 +79,7 @@ class _AssistantViewState extends State<AssistantView> {
       if (mounted) setState(() => _answer = answer);
     } catch (error) {
       if (mounted) {
-        setState(
-          () => _error = error.toString().replaceFirst('Bad state: ', ''),
-        );
+        setState(() => _error = userErrorMessage(error));
       }
     } finally {
       if (mounted) setState(() => _loading = false);

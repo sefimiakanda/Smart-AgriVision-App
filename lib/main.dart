@@ -6,12 +6,21 @@ import 'views/auth/auth_gate.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(const AgrivisionApp());
+  Object? firebaseError;
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (error) {
+    firebaseError = error;
+  }
+  runApp(AgrivisionApp(firebaseError: firebaseError));
 }
 
 class AgrivisionApp extends StatelessWidget {
-  const AgrivisionApp({super.key});
+  const AgrivisionApp({super.key, this.firebaseError});
+
+  final Object? firebaseError;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +33,42 @@ class AgrivisionApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFF7F8F3),
         useMaterial3: true,
       ),
-      home: const AuthGate(),
+      home: firebaseError == null
+          ? const AuthGate()
+          : FirebaseErrorView(error: firebaseError!),
+    );
+  }
+}
+
+class FirebaseErrorView extends StatelessWidget {
+  const FirebaseErrorView({required this.error, super.key});
+
+  final Object error;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.cloud_off, size: 64),
+              const SizedBox(height: 16),
+              const Text(
+                'Connexion au service indisponible',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              const Text(
+                'Vérifiez la connexion Internet et la configuration Firebase.',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
